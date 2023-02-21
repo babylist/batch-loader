@@ -85,6 +85,19 @@ RSpec.describe BatchLoader do
 
       expect(result).to eq([1, 2])
     end
+
+    it 'forwards arguments' do
+      user = User.save(id: 1)
+      post = Post.new(user_id: user.id)
+
+      batch_loader = post.user_lazy
+
+      expect(
+        batch_loader.method_with_arg_kwarg_and_block(1, kwarg: 2) do |a, b|
+          a + b
+        end
+      ).to eq(3)
+    end
   end
 
   context 'with custom key' do

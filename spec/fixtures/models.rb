@@ -81,6 +81,10 @@ class User
     other.is_a?(User) && id == other.id
   end
 
+  def method_with_arg_kwarg_and_block(arg, kwarg:, &block)
+    block.call(arg, kwarg)
+  end
+
   private
 
   def some_private_method
